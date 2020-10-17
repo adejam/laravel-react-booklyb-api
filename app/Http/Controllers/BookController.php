@@ -60,4 +60,14 @@ class BookController extends Controller
             return ["Result" => "Something went wrong!"];
         }
     }
+    public function delete($id)
+    {
+        $book = Book::find($id);
+        $delete = $book->delete();
+        if ($delete) {
+            return ["Result" => "Book deleted"];
+        } else {
+            return ["Result" => "Something went wrong"];
+        }
+    }
 }

@@ -24,3 +24,4 @@ Route::middleware('auth:api')->get(
 Route::get("books/{book_id?}", [BookController::class, 'getBooks']);
 Route::post("add-book", [BookController::class, 'add']);
 Route::put("update-book", [BookController::class, 'update']);
+Route::delete("delete-book/{id}", [BookController::class, 'delete']);
