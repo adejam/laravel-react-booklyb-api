@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(
         Route::post("add-book", [BookController::class, 'add']);
         Route::put("update-book", [BookController::class, 'update']);
         Route::delete("delete-book/{id}", [BookController::class, 'delete']);
+        Route::post("logout", [UserController::class, 'logout']);
     }
 );
 Route::post("sign-up", [UserController::class, 'register']);

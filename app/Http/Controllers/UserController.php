@@ -52,6 +52,7 @@ class UserController extends Controller
         } else {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
+                Auth::login($user, true);// this logs in user and remembers the user
                 $token = $user->createToken($user->name . 'Logs in')->plainTextToken;
                 return response()->json(
                     [
@@ -63,6 +64,20 @@ class UserController extends Controller
             } else {
                 return [ "error" => "The provided credentials are incorrect!"];
             }
+        }
+    }
+    public function logout(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            Auth::guard('web')->logout();
+            $user->tokens()->delete();
+            return response()->json(
+                [
+                'status' => 200,
+                'message' => "Logout Successful"
+                ]
+            );
         }
     }
 }
