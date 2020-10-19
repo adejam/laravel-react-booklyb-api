@@ -89,6 +89,7 @@ class BookController extends Controller
     }
     public function delete($id)
     {
+        //to delete
         if (Auth::check()) {
             $book = Book::findOrFail($id);
             $delete = $book->delete();
