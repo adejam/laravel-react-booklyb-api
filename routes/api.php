@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,14 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::middleware('auth:api')->get(
-    '/user',
-    function (Request $request) {
-        return $request->user();
+Route::middleware('auth:sanctum')->group(
+    function () {
+        // return $request->user();
+        Route::get("books/{book_id?}", [BookController::class, 'getBooks']);
+        Route::post("add-book", [BookController::class, 'add']);
+        Route::put("update-book", [BookController::class, 'update']);
+        Route::delete("delete-book/{id}", [BookController::class, 'delete']);
     }
 );
-Route::get("books/{book_id?}", [BookController::class, 'getBooks']);
-Route::post("add-book", [BookController::class, 'add']);
-Route::put("update-book", [BookController::class, 'update']);
-Route::delete("delete-book/{id}", [BookController::class, 'delete']);
+Route::post("sign-up", [UserController::class, 'register']);
+Route::post("login", [UserController::class, 'login']);
