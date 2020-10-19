@@ -63,6 +63,10 @@
             "@php artisan key:generate --ansi"
         ],
         "phpcs": "phpcs . --extensions=php --ignore=vendor",
-        "phpcbf": "phpcbf . --extensions=php --ignore=vendor"
+        "phpcbf": "phpcbf . --extensions=php --ignore=vendor",
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "chmod -R 777 public/"
+        ]
     }
 }
