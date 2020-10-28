@@ -16,9 +16,15 @@ return [
     */
 
     'paths' => ['api/*',
-                'login',
-                'logout',
-                'get-user',
+                '/login',
+                '/logout',
+                '/get-user',
+                '/sign-up',
+                '/books/{book_id?}',
+                '/add-book',
+                '/update-book',
+                '/delete-book/{id}',
+                '/logout',
                ],
 
     'allowed_methods' => ['*'],
