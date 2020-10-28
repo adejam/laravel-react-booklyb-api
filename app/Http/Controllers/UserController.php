@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Validator;
 use Auth;
+use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
+    public function getUser(Request $request)
+    {
+        if (Auth::check()) {
+            return Auth::user()->name;
+        }
+    }
+
     public function register(Request $request)
     {
         $rules = array(
@@ -27,15 +35,14 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->save();
-
-        
         
             $token = $user->createToken($request->name . 'Sign up')->plainTextToken;
             return response()->json(
                 [
                 'status' => 200,
                 'message' => "Sign up Successful",
-                'token' => $token
+                'token' => $token,
+                'username' => $user->name
                 ]
             );
         }
@@ -52,13 +59,14 @@ class UserController extends Controller
         } else {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
-                Auth::login($user, true);// this logs in user and remembers the user
+                // Auth::login($user, true);// this logs in user and remembers the user
                 $token = $user->createToken($user->name . 'Logs in')->plainTextToken;
                 return response()->json(
                     [
                     'status' => 200,
                     'message' => "Login Successful",
-                    'token' => $token
+                    'token' => $token,
+                    'username' => $user->name
                     ]
                 );
             } else {
@@ -72,6 +80,7 @@ class UserController extends Controller
             $user = Auth::user();
             Auth::guard('web')->logout();
             $user->tokens()->delete();
+            
             return response()->json(
                 [
                 'status' => 200,

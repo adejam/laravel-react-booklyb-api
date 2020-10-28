@@ -19,11 +19,12 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:sanctum')->group(
     function () {
         // return $request->user();
+        Route::get("get-user", [UserController::class, 'getUser']);
         Route::get("books/{book_id?}", [BookController::class, 'getBooks']);
         Route::post("add-book", [BookController::class, 'add']);
         Route::put("update-book", [BookController::class, 'update']);
         Route::delete("delete-book/{id}", [BookController::class, 'delete']);
-        Route::post("logout", [UserController::class, 'logout']);
+        Route::get("logout", [UserController::class, 'logout']);
     }
 );
 Route::post("sign-up", [UserController::class, 'register']);

@@ -17,18 +17,18 @@ class CreateBooksTable extends Migration
             'books',
             function (Blueprint $table) {
                 $table->id();
-                $table->char('book_id');
-                $table->bigInteger('user_id')->unsigned();
-                $table->foreign('user_id')->references('id')->on('users');
-                $table->string('book_title');
-                $table->string('book_author');
-                $table->string('book_category');
+                $table->char('bookId');
+                $table->bigInteger('userId')->unsigned();
+                $table->foreign('userId')->references('id')->on('users');
+                $table->string('bookTitle');
+                $table->string('bookAuthor')->nullable();
+                $table->string('bookCategory');
                 $table->string('comment')->nullable();
-                $table->bigInteger('number_of_pages')->unsigned()->nullable();
-                $table->integer('current_page_read')->unsigned()->nullable();
-                $table->integer('current_read_percent')->unsigned()->nullable();
-                $table->char('current_chapter_title')->nullable();
-                $table->integer('current_chapter_read')->unsigned()->nullable();
+                $table->bigInteger('numberOfPages')->unsigned()->nullable();
+                $table->integer('currentPageRead')->unsigned()->nullable();
+                $table->integer('currentReadPercent')->unsigned()->nullable();
+                $table->string('currentChapterTitle')->nullable();
+                $table->integer('currentChapterRead')->unsigned()->nullable();
                 $table->timestamps();
             }
         );
