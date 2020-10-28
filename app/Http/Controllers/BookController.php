@@ -74,7 +74,7 @@ class BookController extends Controller
                 $book->currentChapterTitle = $request->currentChapterTitle;
                 $book->currentChapterRead = $request->currentChapterRead;
                 if ($book->numberOfPages && $book->currentPageRead) {
-                    $book->currentReadPercent = (($book->currentPageRead / $book->numberOfPages)*100);
+                    $book->currentReadPercent = round(($book->currentPageRead / $book->numberOfPages)*100);
                 } else {
                     $book->currentReadPercent = null;
                 }
@@ -121,7 +121,7 @@ class BookController extends Controller
                 $book->currentChapterTitle = $request->currentChapterTitle;
                 $book->currentChapterRead = $request->currentChapterRead;
                 if ($book->numberOfPages && $book->currentPageRead) {
-                    $book->currentReadPercent = (($book->currentPageRead / $book->numberOfPages)*100);
+                    $book->currentReadPercent = round(($book->currentPageRead / $book->numberOfPages)*100);
                 } else {
                     $book->currentReadPercent = null;
                 }
